@@ -24,6 +24,9 @@ internal abstract class MockBeanRandomIterable<T : Any>(configurations: List<Con
         )
     }
 
+    override val defaultValue: Any?
+        get() = emptyList<Any>()
+
     override val classJava: Class<*> = java.lang.Iterable::class.java
 
     abstract val collectionClass: KClass<T>

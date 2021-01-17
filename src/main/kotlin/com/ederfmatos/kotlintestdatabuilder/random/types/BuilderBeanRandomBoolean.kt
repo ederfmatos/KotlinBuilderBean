@@ -13,6 +13,8 @@ internal class BuilderBeanRandomBoolean(configurations: List<ConfigurationEnum>)
 
     override val classJava: Class<*> = java.lang.Boolean::class.java
 
+    override val defaultValue: Any = false
+
     override fun isInstanceOf(fieldClass: Class<*>): Boolean {
         return super.isInstanceOf(fieldClass) || fieldClass.name.equals(Boolean::class.simpleName, ignoreCase = true)
     }

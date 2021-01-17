@@ -25,6 +25,8 @@ internal class MockBeanRandomMap(configurations: List<ConfigurationEnum>) :
         return resultMap
     }
 
+    override val defaultValue = emptyMap<Any, Any>()
+
     override val classJava: Class<*> = java.util.Map::class.java
 
 }
