@@ -1,16 +1,17 @@
 package com.ederfmatos.kotlintestdatabuilder.random.types
 
 import com.ederfmatos.kotlintestdatabuilder.KotlinTestDataBuilder.Companion.oneBuilderOf
+import com.ederfmatos.kotlintestdatabuilder.config.ConfigurationEnum
 import com.ederfmatos.kotlintestdatabuilder.random.MockBeanRandomValueAbstract
 import com.ederfmatos.kotlintestdatabuilder.random.MockBeanRandomValueEnum
-import com.ederfmatos.kotlintestdatabuilder.random.singleton.RandomObject.randomInt
-import java.lang.reflect.Field
 
-class MockBeanRandomAny : MockBeanRandomValueAbstract<Any>() {
+internal class MockBeanRandomAny(configurations: List<ConfigurationEnum>) : MockBeanRandomValueAbstract<Any>(configurations) {
 
     override fun getRandomValue(clazz: Class<*>): Any? {
         return try {
-            oneBuilderOf(clazz).build()
+            oneBuilderOf(clazz)
+                .apply { configurations.forEach(this::configure) }
+                .build()
         } catch (exception: Exception) {
             null
         }
@@ -20,7 +21,7 @@ class MockBeanRandomAny : MockBeanRandomValueAbstract<Any>() {
         return MockBeanRandomValueEnum.values()
             .filter { it.name  != "ANY" }
             .map(MockBeanRandomValueEnum::generator)
-            .none { it.isInstanceOf(fieldClass) }
+            .none { it(configurations).isInstanceOf(fieldClass) }
     }
 
     override val classJava: Class<*> = java.lang.Object::class.java

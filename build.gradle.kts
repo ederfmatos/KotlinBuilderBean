@@ -1,12 +1,15 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+import java.io.FileInputStream
+import java.util.*
+
 plugins {
     kotlin("jvm") version "1.4.21"
     `maven-publish`
 }
 
 group = "com.ederfmatos"
-version = "2.0"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -28,23 +31,27 @@ tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+val githubProperties = Properties()
+githubProperties.load(FileInputStream(rootProject.file("github.properties")))
+
 publishing {
     publications {
-        create<MavenPublication>("maven") {
-            groupId = "com.ederfmatos"
-            artifactId = "kotlintestdatabuilder"
-            version = "2.0"
-
-            from(components["java"])
+        create<MavenPublication>("gpr") {
+            run {
+                groupId = "com.ederfmatos"
+                artifactId = "kotlintestdatabuilder"
+                version = "1.0.0"
+                artifact("$buildDir/libs/${artifactId}-${version}.jar")
+            }
         }
     }
     repositories {
         maven {
-            name = "KotlinTestDataBuilder"
-            setUrl("https://maven.pkg.github.com/ederfmatos/KotlinTestDataBuilder")
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/ederfmatos/KotlinBuilderBean")
             credentials {
                 username = "ederfmatos"
-                password = "28eb9b4f0e1b6611d1439ce335408d671429e24e"
+                password = "1b3aec180ae16c3fff1044484f62d414f1bcd11a"
             }
         }
     }

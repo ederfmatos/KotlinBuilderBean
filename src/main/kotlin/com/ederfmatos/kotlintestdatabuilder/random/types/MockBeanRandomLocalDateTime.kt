@@ -1,12 +1,13 @@
 package com.ederfmatos.kotlintestdatabuilder.random.types
 
+import com.ederfmatos.kotlintestdatabuilder.config.ConfigurationEnum
 import com.ederfmatos.kotlintestdatabuilder.random.MockBeanRandomValueAbstract
 import java.lang.reflect.Field
 import java.time.LocalDate
 import java.time.LocalDateTime
 import kotlin.reflect.KClass
 
-class MockBeanRandomLocalDateTime : MockBeanRandomValueAbstract<LocalDateTime>() {
+internal class MockBeanRandomLocalDateTime(configurations: List<ConfigurationEnum>) : MockBeanRandomValueAbstract<LocalDateTime>(configurations) {
 
     override fun getRandomValue(clazz: Class<*>): LocalDateTime = LocalDateTime.of(
         (1970..LocalDate.now().year).random(),

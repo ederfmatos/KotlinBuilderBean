@@ -1,10 +1,10 @@
 package com.ederfmatos.kotlintestdatabuilder.random.types
 
+import com.ederfmatos.kotlintestdatabuilder.config.ConfigurationEnum
 import com.ederfmatos.kotlintestdatabuilder.random.MockBeanRandomValueAbstract
-import com.ederfmatos.kotlintestdatabuilder.random.singleton.RandomObject
-import java.lang.reflect.Field
+import com.ederfmatos.kotlintestdatabuilder.singleton.RandomObject
 
-class MockBeanRandomLong : MockBeanRandomValueAbstract<Long>() {
+internal class MockBeanRandomLong(configurations: List<ConfigurationEnum>) : MockBeanRandomValueAbstract<Long>(configurations) {
 
     override fun getRandomValue(clazz: Class<*>): Long = RandomObject.random.nextLong()
 

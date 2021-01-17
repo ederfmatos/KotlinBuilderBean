@@ -1,13 +1,15 @@
 package com.ederfmatos.kotlintestdatabuilder
 
+import com.ederfmatos.kotlintestdatabuilder.config.ConfigurationEnum
 import com.ederfmatos.kotlintestdatabuilder.random.MockBeanRandomValueEnum.Companion.getRandomValueFromField
-import com.ederfmatos.kotlintestdatabuilder.random.singleton.GsonObject
+import com.ederfmatos.kotlintestdatabuilder.singleton.GsonObject
 import java.util.*
 import kotlin.reflect.KClass
 
 class KotlinTestDataBuilder<C : Any>(private val builderClass: Class<C>) {
 
     private val fieldValueMap: MutableMap<String?, Any?> = HashMap()
+    private val configurations: MutableList<ConfigurationEnum> = mutableListOf()
 
     companion object {
         fun <C : Any> oneBuilderOf(builderClass: KClass<C>) = KotlinTestDataBuilder(builderClass.java)
@@ -18,6 +20,10 @@ class KotlinTestDataBuilder<C : Any>(private val builderClass: Class<C>) {
     fun without(vararg names: String): KotlinTestDataBuilder<C> {
         names.forEach { with(it, null) }
         return this
+    }
+
+    fun configure(config: ConfigurationEnum): KotlinTestDataBuilder<C> {
+        return configurations.add(config).let { this }
     }
 
     fun with(name: String, value: Any?): KotlinTestDataBuilder<C> {
@@ -41,9 +47,10 @@ class KotlinTestDataBuilder<C : Any>(private val builderClass: Class<C>) {
     fun optional() = Optional.ofNullable(create())
 
     private fun create(): C {
-        val bean = builderClass.declaredFields.map {
+        val bean = builderClass.declaredFields
+            .map {
             it.name to if (fieldValueMap.containsKey(it.name)) fieldValueMap[it.name]
-            else getRandomValueFromField(it)
+            else getRandomValueFromField(it, configurations)
         }
             .filter { it.second != null }
             .fold(mutableMapOf<String, Any?>()) { accum, item ->

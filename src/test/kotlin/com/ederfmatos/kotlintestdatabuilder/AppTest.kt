@@ -1,6 +1,8 @@
 package com.ederfmatos.kotlintestdatabuilder
 
 import com.ederfmatos.kotlintestdatabuilder.KotlinTestDataBuilder.Companion.oneBuilderOf
+import com.ederfmatos.kotlintestdatabuilder.config.ConfigurationEnum
+import org.junit.Assert.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.math.BigDecimal
@@ -39,6 +41,18 @@ class AppTest {
     }
 
     @Test
+    fun shouldCreateMockWithoutLists() {
+        val kClass: KClass<Response> = Response::class
+
+        val response = oneBuilderOf(kClass)
+            .configure(ConfigurationEnum.WITHOUT_LISTS)
+            .build()
+
+        assertNotNull(response)
+        assertTrue(response.list.isEmpty())
+    }
+
+    @Test
     fun shouldThrowErrorOnRemoveInexistentAttribute() {
         assertThrows<NoSuchFieldException> {
             oneBuilderOf(Response::class)
@@ -57,9 +71,9 @@ data class Response(
     val createdAt: Date,
     val salary: Double,
     val price: Float,
-    val list: List<String>,
-    val types: List<Type>,
-    val values: List<BigDecimal>,
+    val list: List<String> = emptyList(),
+    val types: List<Type> = emptyList(),
+    val values: List<BigDecimal> = emptyList(),
     val valuesSet: Set<BigDecimal>,
     val valuesMutableSet: MutableSet<String>,
     val valuesMutableList: MutableList<String>,

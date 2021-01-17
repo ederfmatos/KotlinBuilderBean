@@ -1,4 +1,4 @@
-package com.ederfmatos.kotlintestdatabuilder.random.singleton
+package com.ederfmatos.kotlintestdatabuilder.singleton
 
 import java.util.*
 

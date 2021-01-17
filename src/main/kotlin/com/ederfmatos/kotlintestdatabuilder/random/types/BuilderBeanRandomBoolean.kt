@@ -1,12 +1,11 @@
 package com.ederfmatos.kotlintestdatabuilder.random.types
 
+import com.ederfmatos.kotlintestdatabuilder.config.ConfigurationEnum
 import com.ederfmatos.kotlintestdatabuilder.random.MockBeanRandomValueAbstract
 
-import com.ederfmatos.kotlintestdatabuilder.random.singleton.RandomObject
-import java.lang.reflect.Field
-import kotlin.reflect.KClass
+import com.ederfmatos.kotlintestdatabuilder.singleton.RandomObject
 
-class BuilderBeanRandomBoolean : MockBeanRandomValueAbstract<Boolean>() {
+internal class BuilderBeanRandomBoolean(configurations: List<ConfigurationEnum>) : MockBeanRandomValueAbstract<Boolean>(configurations) {
 
     override fun getRandomValue(clazz: Class<*>): Boolean {
         return RandomObject.random.nextBoolean()

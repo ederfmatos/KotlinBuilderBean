@@ -1,11 +1,10 @@
 package com.ederfmatos.kotlintestdatabuilder.random.types
 
+import com.ederfmatos.kotlintestdatabuilder.config.ConfigurationEnum
 import com.ederfmatos.kotlintestdatabuilder.random.MockBeanRandomValueAbstract
-import com.ederfmatos.kotlintestdatabuilder.random.singleton.RandomObject
-import java.lang.reflect.Field
-import kotlin.reflect.KClass
+import com.ederfmatos.kotlintestdatabuilder.singleton.RandomObject
 
-class BuilderBeanRandomChar : MockBeanRandomValueAbstract<Char>() {
+internal class BuilderBeanRandomChar(configurations: List<ConfigurationEnum>) : MockBeanRandomValueAbstract<Char>(configurations) {
 
     private val ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 

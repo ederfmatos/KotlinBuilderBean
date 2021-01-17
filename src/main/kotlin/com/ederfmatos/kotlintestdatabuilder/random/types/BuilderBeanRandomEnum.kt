@@ -1,14 +1,10 @@
 package com.ederfmatos.kotlintestdatabuilder.random.types
 
+import com.ederfmatos.kotlintestdatabuilder.config.ConfigurationEnum
 import com.ederfmatos.kotlintestdatabuilder.random.MockBeanRandomValueAbstract
-import com.ederfmatos.kotlintestdatabuilder.random.singleton.RandomObject
-import java.lang.reflect.Field
-import java.time.LocalDate
-import java.util.*
-import java.util.concurrent.ThreadLocalRandom
-import kotlin.reflect.KClass
+import com.ederfmatos.kotlintestdatabuilder.singleton.RandomObject
 
-class BuilderBeanRandomEnum : MockBeanRandomValueAbstract<Enum<*>>() {
+internal class BuilderBeanRandomEnum(configurations: List<ConfigurationEnum>) : MockBeanRandomValueAbstract<Enum<*>>(configurations) {
 
     override fun getRandomValue(clazz: Class<*>): Any? {
         return clazz.enumConstants.let { it[RandomObject.randomInt(it.size - 1)]}

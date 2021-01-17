@@ -1,7 +1,6 @@
-package com.ederfmatos.kotlintestdatabuilder.random.singleton
+package com.ederfmatos.kotlintestdatabuilder.singleton
 
 import com.google.gson.Gson
-import kotlin.reflect.KClass
 
 object GsonObject {
 

@@ -1,10 +1,10 @@
 package com.ederfmatos.kotlintestdatabuilder.random.types
 
+import com.ederfmatos.kotlintestdatabuilder.config.ConfigurationEnum
 import com.ederfmatos.kotlintestdatabuilder.random.MockBeanRandomValueAbstract
-import com.ederfmatos.kotlintestdatabuilder.random.singleton.RandomObject.randomInt
-import java.lang.reflect.Field
+import com.ederfmatos.kotlintestdatabuilder.singleton.RandomObject.randomInt
 
-class MockBeanRandomString : MockBeanRandomValueAbstract<String>() {
+internal class MockBeanRandomString(configurations: List<ConfigurationEnum>) : MockBeanRandomValueAbstract<String>(configurations) {
 
     override fun getRandomValue(clazz: Class<*>): Any? {
         return 1.rangeTo(randomInt(25) + 10)

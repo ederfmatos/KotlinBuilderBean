@@ -1,8 +1,9 @@
 package com.ederfmatos.kotlintestdatabuilder.random.types
 
+import com.ederfmatos.kotlintestdatabuilder.config.ConfigurationEnum
 import kotlin.reflect.KClass
 
-class MockBeanRandomMutableList : MockBeanRandomIterable<MutableList<*>>() {
+internal class MockBeanRandomMutableList(configurations: List<ConfigurationEnum>) : MockBeanRandomIterable<MutableList<*>>(configurations) {
 
     override val collectionClass: KClass<MutableList<*>> = MutableList::class
 

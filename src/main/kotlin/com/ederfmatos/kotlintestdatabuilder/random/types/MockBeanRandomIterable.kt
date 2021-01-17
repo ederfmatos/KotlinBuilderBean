@@ -1,14 +1,16 @@
 package com.ederfmatos.kotlintestdatabuilder.random.types
 
+import com.ederfmatos.kotlintestdatabuilder.config.ConfigurationEnum
 import com.ederfmatos.kotlintestdatabuilder.random.MockBeanRandomValueAbstract
 import java.lang.reflect.Field
 import java.lang.reflect.ParameterizedType
 import kotlin.reflect.KClass
 
-abstract class MockBeanRandomIterable<T: Any> : MockBeanRandomValueAbstract<T>() {
+internal abstract class MockBeanRandomIterable<T : Any>(configurations: List<ConfigurationEnum>) :
+    MockBeanRandomValueAbstract<T>(configurations) {
 
     override fun getRandomValue(field: Field?): Iterable<*> {
-        val size: Int = com.ederfmatos.kotlintestdatabuilder.random.singleton.RandomObject.randomInt(15) + 2
+        val size: Int = com.ederfmatos.kotlintestdatabuilder.singleton.RandomObject.randomInt(15) + 2
         val type = field?.genericType as ParameterizedType
         val fieldType = type.actualTypeArguments[0] as Class<*>
 
