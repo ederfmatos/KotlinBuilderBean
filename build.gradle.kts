@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.ederfmatos"
-version = "1.0.0"
+version = "1.1.5"
 
 repositories {
     mavenCentral()
@@ -40,7 +40,7 @@ publishing {
             run {
                 groupId = "com.ederfmatos"
                 artifactId = "kotlintestdatabuilder"
-                version = "1.0.0"
+                version = "1.1.5"
                 artifact("$buildDir/libs/${artifactId}-${version}.jar")
             }
         }
